@@ -35,7 +35,7 @@ actor QuakeClient {
             let response = try decoder.decode(GeoJSON.self, from: data)
             var updatedResponse = response.quakes
             if let afterOneHr = updatedResponse.firstIndex(where: { quake in
-                quake.time.timeIntervalSinceNow > 3600
+                abs(quake.time.timeIntervalSinceNow) > 3600
             }) {
                 let indexRange = updatedResponse.startIndex..<afterOneHr
                 
